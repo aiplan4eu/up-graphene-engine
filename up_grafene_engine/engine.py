@@ -51,7 +51,7 @@ class GrafeneEngine(ge_pb2_grpc.GrafeneEngineServicer):
 
         self.log_format = (
             '[%(asctime)s] %(levelname)-8s %(name)-12s %(message)s')
-        self.logger = logging.getLogger("TSB Space Service")
+        self.logger = logging.getLogger("UP Grafene Engine")
         logging.basicConfig(level=logging.INFO, format=self.log_format)
 
         self.reader = ProtobufReader()
