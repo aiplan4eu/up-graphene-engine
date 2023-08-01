@@ -19,12 +19,13 @@ import fractions
 from typing import OrderedDict
 
 #import unified_planning.grpc.generated.unified_planning_pb2 as proto
-import grpc_io.grafene_engine_pb2 as proto
+import up_grafene_engine.grpc_io.grafene_engine_pb2 as proto
 from unified_planning.exceptions import UPException
 from unified_planning import Environment
 from unified_planning import model
 from unified_planning.model import metrics, TimePointInterval, GlobalEndTiming
 import unified_planning.plans
+import unified_planning.engines
 from unified_planning.grpc.converter import Converter, handles
 from unified_planning.model import (
     DurativeAction,

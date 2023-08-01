@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import grpc_io.grafene_engine_pb2 as grafene__engine__pb2
+import up_grafene_engine.grpc_io.grafene_engine_pb2 as grafene__engine__pb2
 
 
 class GrafeneEngineStub(object):

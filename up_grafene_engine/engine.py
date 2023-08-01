@@ -11,8 +11,8 @@ import up_grafene_engine.grpc_io.grafene_engine_pb2_grpc as ge_pb2_grpc
 
 # Can't import the unified_planning Protobuf{Reader/Writer} because it causes
 # the same grpc names to be defined more than once; and this is not allowed
-from grpc_io.proto_reader import ProtobufReader
-from grpc_io.proto_writer import ProtobufWriter
+from up_grafene_engine.grpc_io.proto_reader import ProtobufReader
+from up_grafene_engine.grpc_io.proto_writer import ProtobufWriter
 
 import unified_planning as up
 from unified_planning.model import Problem

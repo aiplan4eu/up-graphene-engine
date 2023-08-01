@@ -8,6 +8,6 @@ setup(
     description='up_grafene_engine',
     author='FBK Team',
     author_email='framba@fbk.eu',
-    packages=['up_grafene_engine'],
+    packages=['up_grafene_engine', 'up_grafene_engine.grpc_io'],
     license='APACHE'
 )
