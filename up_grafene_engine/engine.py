@@ -38,6 +38,7 @@ class GrafeneEngine(ge_pb2_grpc.GrafeneEngineServicer):
         self._anytime_problems: Queue[Tuple[Problem, OptimalityGuarantee]] = Queue()
         self._anytime_results: Queue[Iterator[PlanGenerationResult]] = Queue()
         self._anytime_problem: Optional[Problem] = None
+        self._anytime_stop: Optional[Queue] = None
         self._anytime_lock: Lock = Lock()
 
         self._validate_problems: Queue[Tuple[Problem, Plan]] = Queue()
@@ -85,9 +86,12 @@ class GrafeneEngine(ge_pb2_grpc.GrafeneEngineServicer):
         self._anytime_lock.acquire()
         assert self._anytime_problem is None
         self._anytime_problem = problem
+        assert self._anytime_stop is None
+        self._anytime_stop = Queue()
         self._anytime_problems.put((problem, guarantee))
         res = self._anytime_results.get(block=True)
         self._anytime_problem = None
+        self._anytime_stop = None
         self._anytime_lock.release()
 
         return res
@@ -148,21 +152,29 @@ class GrafeneEngine(ge_pb2_grpc.GrafeneEngineServicer):
         self.logger.info(f"Sending PlanAnytime Request: {problem.name}")
         return plan_request
 
-    def _anytime_iterator(self, request_iterator, problem: Problem) -> Iterator[PlanGenerationResult]:
-        for request in request_iterator:
-            res = self.reader.convert(request, problem)
-            assert isinstance(res, PlanGenerationResult)
-            self.logger.info(f"Received PlanAnytime result for problem {problem.name}: {res}")
-            yield res
-            if res.status != PlanGenerationResultStatus.INTERMEDIATE:
-                break
+    def _anytime_iterator(self, request_iterator, problem: Problem, anytime_stop: Queue) -> Iterator[PlanGenerationResult]:
+        try:
+            for request in request_iterator:
+                res = self.reader.convert(request, problem)
+                assert isinstance(res, PlanGenerationResult)
+                self.logger.info(f"Received PlanAnytime result for problem {problem.name}: {res}")
+                yield res
+                if res.status != PlanGenerationResultStatus.INTERMEDIATE:
+                    break
+        finally:
+            # At the end notify the consumePlanAnytime that it can return
+            anytime_stop.put(None)
 
     def consumePlanAnytime(self, request_iterator, context):
         # Create the Iterator to put in the queue
-        res_iterator = self._anytime_iterator(request_iterator, self._anytime_problem)
+        wait_termination_queue = self._anytime_stop
+        res_iterator = self._anytime_iterator(request_iterator, self._anytime_problem, wait_termination_queue)
         self._anytime_results.put(res_iterator)
 
         self.logger.info(f"Received PlanAnytime generator")
+
+        # Wait that the user stops using the iterator
+        wait_termination_queue.get(block=True)
 
         dummy = ge_pb2.Empty()
         return dummy
