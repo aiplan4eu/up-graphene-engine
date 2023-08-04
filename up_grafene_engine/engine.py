@@ -140,7 +140,7 @@ class GrafeneEngine(ge_pb2_grpc.GrafeneEngineServicer):
 
     def producePlanAnytime(self, request, context):
         # Wait on the queue, populated by the self.get_solutions method
-        problem, guarantee = self._oneshot_problems.get(block=True)
+        problem, guarantee = self._anytime_problems.get(block=True)
         plan_request = ge_pb2.PlanRequest(
             problem = self.writer.convert(problem),
             resolution_mode = ge_pb2.PlanRequest.Mode.Value(guarantee.name)
