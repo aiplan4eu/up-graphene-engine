@@ -21,7 +21,13 @@ from unified_planning.engines import OptimalityGuarantee, CompilationKind, PlanG
 from unified_planning.exceptions import UPUsageError
 from unified_planning.plans import Plan
 
-class GrafeneEngine(ge_pb2_grpc.GrafeneEngineServicer):
+class MetaSingletonGrafeneEngine(type):
+    _instances = {}
+    def __call__(cls, port):
+        return cls._instances.setdefault(port, super(MetaSingletonGrafeneEngine, cls).__call__(port))
+
+class GrafeneEngine(ge_pb2_grpc.GrafeneEngineServicer, metaclass=MetaSingletonGrafeneEngine):
+
     def __init__(self, port = 8061):
         self.port = port
 
