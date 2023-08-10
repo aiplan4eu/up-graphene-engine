@@ -1,7 +1,7 @@
 # up-grafene-engine
 This repository stores the code to easily connect a new component being created to the unified-planner component in the ai4experiments grafene platform.
 
-This repository aims to simplify and streamline the integration of a new use-case on the [AI4Experiments platfrom](https://aiexp-dev.ai4europe.eu/#/home).
+This repository aims to simplify and streamline the integration of a new use-case on the [AI4Experiments platfrom](https://aiexp-dev.ai4europe.eu/#/home). At the moment we are using the DEV version of the platform because the original version does not support recursively defined proto files.
 
 ## Introduction
 
@@ -54,15 +54,13 @@ res = engine.solve(problem, "solved_optimally")
 
 The `solve` method interacts with the unified-planner component trough GRPC and `res` is the [PlanGenerationResult](https://unified-planning.readthedocs.io/en/latest/api/engines/PlanGenerationResult.html) returned.
 
-How the `GrafeneEngine` is used depends a lot on the specific use-case; it is important that only one object of type `GrafeneEngine` is created. (TODO: NOTE maybe this can be enforced in the class itself)
+How the `GrafeneEngine` is used depends a lot on the specific use-case.
 
 Also, in this part the user might interact with the GUI. What the GUI does it's very use-case specific, for example in the TSB-Space the user decides which activities and in which order must be performed by the rover.
 
 ### 4: The .proto file
 
 The .proto file is already ready and it's the one that you can find in `up-grafene-engine/up_grafene_engine/grpc_io/grafene_engine.proto`
-
- ...TODO part where the usable methods are configurable...
 
 ### 5: Onboarding the model in the platform and creating the solution
 
@@ -72,7 +70,7 @@ This part is divided in substeps:
 2. Click on `ON-BOARDING MODEL`, on the left side.
 3. Choose a name for the model
 4. Insert the URI where the docker image is stored (for example, the TSB-Space docker image is stored [here](https://hub.docker.com/layers/frambaluca/ai4eu-experiments/tsb-space-v3/images/sha256-8a1b4fdee11092795e707f53de36049790251f76eb831502f9a03c5ec65fd97c?context=repo) and the URI is `docker.io/frambaluca/ai4eu-experiments:tsb-space-v3`)
-5. Browse for the protobuf file. The correct file is the one in the `up-grafene-engine/up_grafene_engine/grpc_io/grafene_engine.proto` path. TODO: here add part where the proto is configurable.
+5. Browse for the protobuf file. The correct file is the one in the `up-grafene-engine/up_grafene_engine/grpc_io/grafene_engine.proto` path.
 6. After the step above, go in `MY MODELS`, on the left side. There you will find a model with the name you chose; click on that model.
 7. After a short loading, the button `Manage My Model` (on the upper side) becomes clickable; click it to get into the model options.
 8. From there click on `Manage Publisher/Authors` and insert a publisher name and at least one author.
