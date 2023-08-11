@@ -6,13 +6,13 @@ import grpc
 from queue import Queue
 from threading import Lock
 
-import up_grafene_engine.grpc_io.grafene_engine_pb2 as ge_pb2
-import up_grafene_engine.grpc_io.grafene_engine_pb2_grpc as ge_pb2_grpc
+import up_graphene_engine.grpc_io.graphene_engine_pb2 as ge_pb2
+import up_graphene_engine.grpc_io.graphene_engine_pb2_grpc as ge_pb2_grpc
 
 # Can't import the unified_planning Protobuf{Reader/Writer} because it causes
 # the same grpc names to be defined more than once; and this is not allowed
-from up_grafene_engine.grpc_io.proto_reader import ProtobufReader
-from up_grafene_engine.grpc_io.proto_writer import ProtobufWriter
+from up_graphene_engine.grpc_io.proto_reader import ProtobufReader
+from up_graphene_engine.grpc_io.proto_writer import ProtobufWriter
 
 import unified_planning as up
 from unified_planning.model import Problem
@@ -21,12 +21,12 @@ from unified_planning.engines import OptimalityGuarantee, CompilationKind, PlanG
 from unified_planning.exceptions import UPUsageError
 from unified_planning.plans import Plan
 
-class MetaSingletonGrafeneEngine(type):
+class MetaSingletonGrapheneEngine(type):
     _instances = {}
     def __call__(cls, port):
-        return cls._instances.setdefault(port, super(MetaSingletonGrafeneEngine, cls).__call__(port))
+        return cls._instances.setdefault(port, super(MetaSingletonGrapheneEngine, cls).__call__(port))
 
-class GrafeneEngine(ge_pb2_grpc.GrafeneEngineServicer, metaclass=MetaSingletonGrafeneEngine):
+class GrapheneEngine(ge_pb2_grpc.GrapheneEngineServicer, metaclass=MetaSingletonGrapheneEngine):
 
     def __init__(self, port = 8061):
         self.port = port
@@ -58,7 +58,7 @@ class GrafeneEngine(ge_pb2_grpc.GrafeneEngineServicer, metaclass=MetaSingletonGr
 
         self.log_format = (
             '[%(asctime)s] %(levelname)-8s %(name)-12s %(message)s')
-        self.logger = logging.getLogger("UP Grafene Engine")
+        self.logger = logging.getLogger("UP Graphene Engine")
         logging.basicConfig(level=logging.INFO, format=self.log_format)
 
         self.reader = ProtobufReader()
@@ -67,7 +67,7 @@ class GrafeneEngine(ge_pb2_grpc.GrafeneEngineServicer, metaclass=MetaSingletonGr
         # Start the server
         connection = '0.0.0.0:%d' % (self.port)
         self.server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-        ge_pb2_grpc.add_GrafeneEngineServicer_to_server(self, self.server)
+        ge_pb2_grpc.add_GrapheneEngineServicer_to_server(self, self.server)
         self.server.add_insecure_port(connection)
         self.server.start()
         self.logger.info("server started on %s" % connection)
