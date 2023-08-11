@@ -19,7 +19,7 @@ import fractions
 from typing import OrderedDict
 
 #import unified_planning.grpc.generated.unified_planning_pb2 as proto
-import up_grafene_engine.grpc_io.grafene_engine_pb2 as proto
+import up_graphene_engine.grpc_io.grafene_engine_pb2 as proto
 from unified_planning.exceptions import UPException
 from unified_planning import Environment
 from unified_planning import model

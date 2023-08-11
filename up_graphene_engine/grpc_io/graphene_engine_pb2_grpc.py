@@ -2,10 +2,10 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import up_grafene_engine.grpc_io.grafene_engine_pb2 as grafene__engine__pb2
+import up_graphene_engine.grpc_io.graphene_engine_pb2 as graphene__engine__pb2
 
 
-class GrafeneEngineStub(object):
+class GrapheneEngineStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -15,48 +15,48 @@ class GrafeneEngineStub(object):
             channel: A grpc.Channel.
         """
         self.producePlanAnytime = channel.unary_unary(
-                '/GrafeneEngine/producePlanAnytime',
-                request_serializer=grafene__engine__pb2.Empty.SerializeToString,
-                response_deserializer=grafene__engine__pb2.PlanRequest.FromString,
+                '/GrapheneEngine/producePlanAnytime',
+                request_serializer=graphene__engine__pb2.Empty.SerializeToString,
+                response_deserializer=graphene__engine__pb2.PlanRequest.FromString,
                 )
         self.consumePlanAnytime = channel.stream_unary(
-                '/GrafeneEngine/consumePlanAnytime',
-                request_serializer=grafene__engine__pb2.PlanGenerationResult.SerializeToString,
-                response_deserializer=grafene__engine__pb2.Empty.FromString,
+                '/GrapheneEngine/consumePlanAnytime',
+                request_serializer=graphene__engine__pb2.PlanGenerationResult.SerializeToString,
+                response_deserializer=graphene__engine__pb2.Empty.FromString,
                 )
         self.producePlanOneShot = channel.unary_unary(
-                '/GrafeneEngine/producePlanOneShot',
-                request_serializer=grafene__engine__pb2.Empty.SerializeToString,
-                response_deserializer=grafene__engine__pb2.PlanRequest.FromString,
+                '/GrapheneEngine/producePlanOneShot',
+                request_serializer=graphene__engine__pb2.Empty.SerializeToString,
+                response_deserializer=graphene__engine__pb2.PlanRequest.FromString,
                 )
         self.consumePlanOneShot = channel.unary_unary(
-                '/GrafeneEngine/consumePlanOneShot',
-                request_serializer=grafene__engine__pb2.PlanGenerationResult.SerializeToString,
-                response_deserializer=grafene__engine__pb2.Empty.FromString,
+                '/GrapheneEngine/consumePlanOneShot',
+                request_serializer=graphene__engine__pb2.PlanGenerationResult.SerializeToString,
+                response_deserializer=graphene__engine__pb2.Empty.FromString,
                 )
         self.produceValidatePlan = channel.unary_unary(
-                '/GrafeneEngine/produceValidatePlan',
-                request_serializer=grafene__engine__pb2.Empty.SerializeToString,
-                response_deserializer=grafene__engine__pb2.ValidationRequest.FromString,
+                '/GrapheneEngine/produceValidatePlan',
+                request_serializer=graphene__engine__pb2.Empty.SerializeToString,
+                response_deserializer=graphene__engine__pb2.ValidationRequest.FromString,
                 )
         self.consumeValidatePlan = channel.unary_unary(
-                '/GrafeneEngine/consumeValidatePlan',
-                request_serializer=grafene__engine__pb2.ValidationResult.SerializeToString,
-                response_deserializer=grafene__engine__pb2.Empty.FromString,
+                '/GrapheneEngine/consumeValidatePlan',
+                request_serializer=graphene__engine__pb2.ValidationResult.SerializeToString,
+                response_deserializer=graphene__engine__pb2.Empty.FromString,
                 )
         self.produceCompile = channel.unary_unary(
-                '/GrafeneEngine/produceCompile',
-                request_serializer=grafene__engine__pb2.Empty.SerializeToString,
-                response_deserializer=grafene__engine__pb2.Problem.FromString,
+                '/GrapheneEngine/produceCompile',
+                request_serializer=graphene__engine__pb2.Empty.SerializeToString,
+                response_deserializer=graphene__engine__pb2.Problem.FromString,
                 )
         self.consumeCompile = channel.unary_unary(
-                '/GrafeneEngine/consumeCompile',
-                request_serializer=grafene__engine__pb2.CompilerResult.SerializeToString,
-                response_deserializer=grafene__engine__pb2.Empty.FromString,
+                '/GrapheneEngine/consumeCompile',
+                request_serializer=graphene__engine__pb2.CompilerResult.SerializeToString,
+                response_deserializer=graphene__engine__pb2.Empty.FromString,
                 )
 
 
-class GrafeneEngineServicer(object):
+class GrapheneEngineServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def producePlanAnytime(self, request, context):
@@ -118,56 +118,56 @@ class GrafeneEngineServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_GrafeneEngineServicer_to_server(servicer, server):
+def add_GrapheneEngineServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'producePlanAnytime': grpc.unary_unary_rpc_method_handler(
                     servicer.producePlanAnytime,
-                    request_deserializer=grafene__engine__pb2.Empty.FromString,
-                    response_serializer=grafene__engine__pb2.PlanRequest.SerializeToString,
+                    request_deserializer=graphene__engine__pb2.Empty.FromString,
+                    response_serializer=graphene__engine__pb2.PlanRequest.SerializeToString,
             ),
             'consumePlanAnytime': grpc.stream_unary_rpc_method_handler(
                     servicer.consumePlanAnytime,
-                    request_deserializer=grafene__engine__pb2.PlanGenerationResult.FromString,
-                    response_serializer=grafene__engine__pb2.Empty.SerializeToString,
+                    request_deserializer=graphene__engine__pb2.PlanGenerationResult.FromString,
+                    response_serializer=graphene__engine__pb2.Empty.SerializeToString,
             ),
             'producePlanOneShot': grpc.unary_unary_rpc_method_handler(
                     servicer.producePlanOneShot,
-                    request_deserializer=grafene__engine__pb2.Empty.FromString,
-                    response_serializer=grafene__engine__pb2.PlanRequest.SerializeToString,
+                    request_deserializer=graphene__engine__pb2.Empty.FromString,
+                    response_serializer=graphene__engine__pb2.PlanRequest.SerializeToString,
             ),
             'consumePlanOneShot': grpc.unary_unary_rpc_method_handler(
                     servicer.consumePlanOneShot,
-                    request_deserializer=grafene__engine__pb2.PlanGenerationResult.FromString,
-                    response_serializer=grafene__engine__pb2.Empty.SerializeToString,
+                    request_deserializer=graphene__engine__pb2.PlanGenerationResult.FromString,
+                    response_serializer=graphene__engine__pb2.Empty.SerializeToString,
             ),
             'produceValidatePlan': grpc.unary_unary_rpc_method_handler(
                     servicer.produceValidatePlan,
-                    request_deserializer=grafene__engine__pb2.Empty.FromString,
-                    response_serializer=grafene__engine__pb2.ValidationRequest.SerializeToString,
+                    request_deserializer=graphene__engine__pb2.Empty.FromString,
+                    response_serializer=graphene__engine__pb2.ValidationRequest.SerializeToString,
             ),
             'consumeValidatePlan': grpc.unary_unary_rpc_method_handler(
                     servicer.consumeValidatePlan,
-                    request_deserializer=grafene__engine__pb2.ValidationResult.FromString,
-                    response_serializer=grafene__engine__pb2.Empty.SerializeToString,
+                    request_deserializer=graphene__engine__pb2.ValidationResult.FromString,
+                    response_serializer=graphene__engine__pb2.Empty.SerializeToString,
             ),
             'produceCompile': grpc.unary_unary_rpc_method_handler(
                     servicer.produceCompile,
-                    request_deserializer=grafene__engine__pb2.Empty.FromString,
-                    response_serializer=grafene__engine__pb2.Problem.SerializeToString,
+                    request_deserializer=graphene__engine__pb2.Empty.FromString,
+                    response_serializer=graphene__engine__pb2.Problem.SerializeToString,
             ),
             'consumeCompile': grpc.unary_unary_rpc_method_handler(
                     servicer.consumeCompile,
-                    request_deserializer=grafene__engine__pb2.CompilerResult.FromString,
-                    response_serializer=grafene__engine__pb2.Empty.SerializeToString,
+                    request_deserializer=graphene__engine__pb2.CompilerResult.FromString,
+                    response_serializer=graphene__engine__pb2.Empty.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'GrafeneEngine', rpc_method_handlers)
+            'GrapheneEngine', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class GrafeneEngine(object):
+class GrapheneEngine(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
@@ -181,9 +181,9 @@ class GrafeneEngine(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/GrafeneEngine/producePlanAnytime',
-            grafene__engine__pb2.Empty.SerializeToString,
-            grafene__engine__pb2.PlanRequest.FromString,
+        return grpc.experimental.unary_unary(request, target, '/GrapheneEngine/producePlanAnytime',
+            graphene__engine__pb2.Empty.SerializeToString,
+            graphene__engine__pb2.PlanRequest.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -198,9 +198,9 @@ class GrafeneEngine(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.stream_unary(request_iterator, target, '/GrafeneEngine/consumePlanAnytime',
-            grafene__engine__pb2.PlanGenerationResult.SerializeToString,
-            grafene__engine__pb2.Empty.FromString,
+        return grpc.experimental.stream_unary(request_iterator, target, '/GrapheneEngine/consumePlanAnytime',
+            graphene__engine__pb2.PlanGenerationResult.SerializeToString,
+            graphene__engine__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -215,9 +215,9 @@ class GrafeneEngine(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/GrafeneEngine/producePlanOneShot',
-            grafene__engine__pb2.Empty.SerializeToString,
-            grafene__engine__pb2.PlanRequest.FromString,
+        return grpc.experimental.unary_unary(request, target, '/GrapheneEngine/producePlanOneShot',
+            graphene__engine__pb2.Empty.SerializeToString,
+            graphene__engine__pb2.PlanRequest.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -232,9 +232,9 @@ class GrafeneEngine(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/GrafeneEngine/consumePlanOneShot',
-            grafene__engine__pb2.PlanGenerationResult.SerializeToString,
-            grafene__engine__pb2.Empty.FromString,
+        return grpc.experimental.unary_unary(request, target, '/GrapheneEngine/consumePlanOneShot',
+            graphene__engine__pb2.PlanGenerationResult.SerializeToString,
+            graphene__engine__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -249,9 +249,9 @@ class GrafeneEngine(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/GrafeneEngine/produceValidatePlan',
-            grafene__engine__pb2.Empty.SerializeToString,
-            grafene__engine__pb2.ValidationRequest.FromString,
+        return grpc.experimental.unary_unary(request, target, '/GrapheneEngine/produceValidatePlan',
+            graphene__engine__pb2.Empty.SerializeToString,
+            graphene__engine__pb2.ValidationRequest.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -266,9 +266,9 @@ class GrafeneEngine(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/GrafeneEngine/consumeValidatePlan',
-            grafene__engine__pb2.ValidationResult.SerializeToString,
-            grafene__engine__pb2.Empty.FromString,
+        return grpc.experimental.unary_unary(request, target, '/GrapheneEngine/consumeValidatePlan',
+            graphene__engine__pb2.ValidationResult.SerializeToString,
+            graphene__engine__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -283,9 +283,9 @@ class GrafeneEngine(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/GrafeneEngine/produceCompile',
-            grafene__engine__pb2.Empty.SerializeToString,
-            grafene__engine__pb2.Problem.FromString,
+        return grpc.experimental.unary_unary(request, target, '/GrapheneEngine/produceCompile',
+            graphene__engine__pb2.Empty.SerializeToString,
+            graphene__engine__pb2.Problem.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -300,8 +300,8 @@ class GrafeneEngine(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/GrafeneEngine/consumeCompile',
-            grafene__engine__pb2.CompilerResult.SerializeToString,
-            grafene__engine__pb2.Empty.FromString,
+        return grpc.experimental.unary_unary(request, target, '/GrapheneEngine/consumeCompile',
+            graphene__engine__pb2.CompilerResult.SerializeToString,
+            graphene__engine__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

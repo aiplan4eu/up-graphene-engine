@@ -862,7 +862,7 @@ message CompilerResult {
 message Empty {
 }
 
-service GrafeneEngine {
+service GrapheneEngine {
 
     // An anytime plan request to the engine.
     // The engine replies with a stream of N `Answer` messages where:
