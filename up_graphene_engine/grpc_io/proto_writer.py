@@ -18,7 +18,7 @@ from itertools import product
 from typing import List, Union
 
 # import unified_planning.grpc.generated.unified_planning_pb2 as proto
-import up_graphene_engine.grpc_io.grafene_engine_pb2 as proto
+import up_graphene_engine.grpc_io.graphene_engine_pb2 as proto
 from unified_planning import model
 import unified_planning.engines
 import unified_planning.model.htn
