@@ -3,6 +3,10 @@ This repository stores the code to easily connect a new component being created 
 
 This repository aims to simplify and streamline the integration of a new use-case on the [AI4Experiments platfrom](https://aiexp-dev.ai4europe.eu/#/home). At the moment we are using the DEV version of the platform because the original version does not support recursively defined proto files.
 
+## Step by step slides guide
+[Here](https://docs.google.com/presentation/d/1v1R6OdxgOXRrMl8kgfoBc9Ug8xVnPpqz1BUVw3mskwo/edit#slide=id.p) you can find the set of slides that guides you in the step-by-step integration of a component in the platform, using the up-graphene-engine.
+
+
 ## Introduction
 
 The platform needs basically 2 things:
