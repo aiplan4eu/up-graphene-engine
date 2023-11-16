@@ -131,9 +131,12 @@ class GrapheneEngine(ge_pb2_grpc.GrapheneEngineServicer, metaclass=MetaSingleton
     def producePlanOneShot(self, request, context):
         # Wait on the queue, populated by the self.solve method
         problem, guarantee = self._oneshot_problems.get(block=True)
+        guarantee_name = guarantee.name
+        if guarantee_name == "SATISFICING":
+            guarantee_name = "SATISFIABLE"
         plan_request = ge_pb2.PlanRequest(
             problem = self.writer.convert(problem),
-            resolution_mode = ge_pb2.PlanRequest.Mode.Value(guarantee.name)
+            resolution_mode = ge_pb2.PlanRequest.Mode.Value(guarantee_name)
         )
         self.logger.info(f"Sending PlanOneshot Request: {problem.name}")
         return plan_request
